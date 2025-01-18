@@ -1,5 +1,6 @@
 dataset
 2_classes_merged_dataset
 3_classes_merged_dataset
-saved_models
+saved_models/2/**
+saved_models/3/**
 __pycache__

@@ -45,10 +45,6 @@ def train_epoch(model, loader, criterion, optimizer, device, gradient_clip=None,
         total += targets.size(0)
         correct += predicted.eq(targets).sum().item()
 
-        # Opcjonalny druk postępu na podstawie numeru batcha
-        # if (batch_idx % print_interval == 0) or (batch_idx == total_batches):
-        #     avg_batch_loss = running_loss / (batch_idx * loader.batch_size)
-        #     tqdm.write(f"Batch {batch_idx}/{total_batches}, Loss: {avg_batch_loss:.4f}")
 
     avg_loss = running_loss / total
     accuracy = 100.0 * correct / total
@@ -151,10 +147,8 @@ def train_model(model,
         history['val_acc'].append(val_acc)
         print(f"Epoch {epoch+1}: Val Loss: {val_loss:.4f} | Val Acc: {val_acc:.2f}%")
 
-        # Aktualizacja scheduler'a (dostosować do typu scheduler'a)
-        # Jeśli scheduler opiera się na metryce walidacyjnej, można np.:
         if scheduler is not None:
-            scheduler.step(val_loss)  # lub scheduler.step() jeśli scheduler nie oczekuje metryki
+            scheduler.step(val_loss) 
 
         # Zapis najlepszego modelu lub po każdej epoce
         checkpoint_info = f"epoch_{epoch+1}_valacc_{val_acc:.2f}.pth"
